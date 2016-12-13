@@ -18,7 +18,7 @@ void Vehicle::move_backward(){
 }
 
 void Vehicle::girar(int sentido){
-	float max=0.05f*(velocity*10);//giro maximo segun la velocidad
+	float max=0.025f;//*(velocity*10);//giro maximo segun la velocidad
 	if(sentido>0&&giro<0 || sentido<0&&giro>0){
 		giro=0.0f;
 	}else{
@@ -70,7 +70,7 @@ void Vehicle::brake(){
 
 void Vehicle::update(){
 	Object3D::update();
-	system("clear");
-	printf("Car_velocity: %f\n",velocity);
+	//system("clear");
+	printf("\nCar_velocity: %f\n",velocity);
 	printf("Car_giro    : %f\n",giro);
 }

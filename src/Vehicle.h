@@ -13,7 +13,7 @@ public:
 	*/
 
 	float giro=0.0f;
-	float giro_incremento=0.00125f;
+	float giro_incremento=0.00025f;
 
 	float accel=0.000125f;//aceleracion
 	float decel=0.000125f;//desaceleracion

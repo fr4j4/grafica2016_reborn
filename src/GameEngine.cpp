@@ -40,11 +40,15 @@ void GameEngine::run(){
 	tools::debug("Engine is running",tools::DBG_INFO);
 	paused=false;
 	test=new Vehicle("mesh/sedan.obj",&shader_programme);
+	Vehicle* test3=new Vehicle("mesh/sedan.obj",&shader_programme);
+	test3->setPos(0.0f,0.0f,3.0f);
 	addObj(test);
+	addObj(test3);
 	addObj(new Object3D("mesh/car/car.obj",&shader_programme));
 	test->setPos(-3.0f,0.0f,3.0f);
 	cam->target=test;
 	test->set_scale(0.25f,0.25f,0.25f);
+	test3->set_scale(0.25f,0.25f,0.25f);
 
 	while(!glfwWindowShouldClose (g_window)){//bucle principal del motor de juegos
 		static double previous_seconds = glfwGetTime ();

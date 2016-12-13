@@ -1,6 +1,6 @@
 #include "Camera.h"
 #include <math.h>
-#define MIN_CAM_DISTANCE 2
+#define MIN_CAM_DISTANCE 1
 #define MAX_CAM_DISTANCE 10
 Camera::Camera(GLuint *shader_programme,glm::vec2 ScreenSize){
 	this->target=NULL;
