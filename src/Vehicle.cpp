@@ -6,13 +6,17 @@ Vehicle::Vehicle(const char* file_name,GLuint* shader_programme):Object3D(file_n
 
 void Vehicle::move_forward(){
 	printf("acelerando...\n");
-	velocity+=accel;
+	if(fabs(velocity)<max_velocity){
+		velocity+=accel;
+	}
 	pos.x-=velocity*cos(rotation.y);
 	pos.z-=velocity*sin(rotation.y);
 }
 
 void Vehicle::move_backward(){
-	velocity-=accel;
+	if(fabs(velocity)<max_velocity){
+		velocity-=accel;
+	}
 	pos.x-=velocity*cos(rotation.y);
 	pos.z-=velocity*sin(rotation.y);
 }

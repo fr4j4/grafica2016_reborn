@@ -19,6 +19,8 @@ public:
 	float decel=0.000125f;//desaceleracion
 	float decel_brake=0.75f;//freno
 	
+	float max_velocity=0.1f;
+
 	Vehicle(const char*,GLuint*);
 	~Vehicle();
 	

@@ -50,6 +50,9 @@ void GameEngine::run(){
 	test->set_scale(0.25f,0.25f,0.25f);
 	test3->set_scale(0.25f,0.25f,0.25f);
 
+	Object3D* city=new Object3D("mesh/city.obj",&shader_programme);
+	addObj(city);
+	city->set_scale(4.25f,4.25f,4.25f);
 	while(!glfwWindowShouldClose (g_window)){//bucle principal del motor de juegos
 		static double previous_seconds = glfwGetTime ();
 		double current_seconds = glfwGetTime ();
