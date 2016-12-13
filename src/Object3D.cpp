@@ -65,7 +65,7 @@ void Object3D::rotate(float x,float y,float z){
 	M=glm::translate(M,pos);
 	M=glm::scale(M,scale);
 	M=glm::rotate(M,-rotation.y,glm::vec3(0.0f,1.0f,0.0f));
-	M=glm::translate(M,glm::vec3(-0.250f,0.0f,0.0f));
+	
 }
 
 void Object3D::render(){

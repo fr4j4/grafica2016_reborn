@@ -9,7 +9,7 @@ GameEngine::GameEngine(){
 	screenSize=glm::vec2(800,600);
 	g_gl_width=screenSize.x;
 	g_gl_height=screenSize.y;
-	debug_mode=true;
+	debug_mode=false;
 	tools::debug("GameEngine created",tools::DBG_INFO);
 	keyTools::init_keys();
 	//printf("Key:%i\n",key_status.count;
@@ -52,7 +52,7 @@ void GameEngine::run(){
 
 	Object3D* city=new Object3D("mesh/city.obj",&shader_programme);
 	addObj(city);
-	city->set_scale(4.25f,4.25f,4.25f);
+	city->set_scale(5.0f,5.0f,5.0f);
 	while(!glfwWindowShouldClose (g_window)){//bucle principal del motor de juegos
 		static double previous_seconds = glfwGetTime ();
 		double current_seconds = glfwGetTime ();

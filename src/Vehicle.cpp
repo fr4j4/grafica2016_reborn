@@ -3,25 +3,35 @@
 Vehicle::Vehicle(const char* file_name,GLuint* shader_programme):Object3D(file_name,shader_programme){
 	velocity=0.0f;
 }
-
 void Vehicle::move_forward(){
-	printf("acelerando...\n");
+	//printf("acelerando...\n");
 	if(fabs(velocity)<max_velocity){
+		if(velocity>=0){
+			velocity+=accel;
+		}else{
+			velocity+=8*accel;
+		}
 		velocity+=accel;
 	}
 	pos.x-=velocity*cos(rotation.y);
 	pos.z-=velocity*sin(rotation.y);
 }
-
 void Vehicle::move_backward(){
 	if(fabs(velocity)<max_velocity){
-		velocity-=accel;
+		if(velocity<=0){
+			velocity-=accel;
+		}else{
+			velocity-=8*accel;
+		}
 	}
 	pos.x-=velocity*cos(rotation.y);
 	pos.z-=velocity*sin(rotation.y);
 }
 
-void Vehicle::girar(int sentido){
+void Vehicle::girar(int s){
+	int sentido=s;
+	if(velocity<0&&sentido<0)sentido=fabs(-sentido);
+	else if(velocity<0&&sentido>0)sentido=-fabs(sentido);
 	float max=0.025f;//*(velocity*10);//giro maximo segun la velocidad
 	if(sentido>0&&giro<0 || sentido<0&&giro>0){
 		giro=0.0f;
@@ -73,8 +83,10 @@ void Vehicle::brake(){
 }
 
 void Vehicle::update(){
-	Object3D::update();
-	//system("clear");
-	printf("\nCar_velocity: %f\n",velocity);
+	M=glm::mat4();
+	M=glm::translate(M,pos);
+	M=glm::scale(M,scale);
+	M=glm::rotate(M,-rotation.y,glm::vec3(0.0f,1.0f,0.0f));
+	M=glm::translate(M,glm::vec3(-0.450f,0.0f,0.0f));
 	printf("Car_giro    : %f\n",giro);
 }
