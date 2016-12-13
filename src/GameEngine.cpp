@@ -112,29 +112,34 @@ void GameEngine::readInGameKeys(){
 		cam->rotate_around(-0.125f);
 	}
 
-	if (GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_UP)) {
-		tools::debug("UP",tools::DBG_KEY_PRESSED);
-		keyTools::press(K_UP_ARROW);
-		test->move_forward();
-	}
-	else if ((keyTools::get_status(K_UP_ARROW)==1||keyTools::get_status(K_DOWN_ARROW)==1) && 
-		(GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_UP)) || GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_DOWN)) {
+	if (GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_UP) && GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_DOWN)) {
 		//keyTools::release(K_UP_ARROW);
 		//keyTools::press(K_UP_ARROW);
 		test->decelerate();
+	}else{
+		if (GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_UP)) {
+			tools::debug("UP",tools::DBG_KEY_PRESSED);
+			//keyTools::press(K_UP_ARROW);
+			test->move_forward();
+		}
+		if(GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_DOWN)){
+			tools::debug("DOWN",tools::DBG_KEY_PRESSED);
+			test->move_backward();
+		}
 	}
-
-	if(GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_DOWN)){
-		tools::debug("DOWN",tools::DBG_KEY_PRESSED);
-		test->move_backward();
-	}
-	if (GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_LEFT)) {
-		tools::debug("LEFT",tools::DBG_KEY_PRESSED);
-		test->rotate(0.0f,-0.125f,0.0f);
-	}
-	if(GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_RIGHT)){
-		tools::debug("RIGHT",tools::DBG_KEY_PRESSED);
-		test->rotate(0.0f,+0.125f,0.0f);
+	if(GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_LEFT) && GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_RIGHT)){
+		test->centrar();
+	}else{
+		if (GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_LEFT)) {
+			tools::debug("LEFT",tools::DBG_KEY_PRESSED);
+			test->girar(-1);
+			//test->rotate(0.0f,-0.125f,0.0f);
+		}
+		if(GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_RIGHT)){
+			tools::debug("RIGHT",tools::DBG_KEY_PRESSED);
+			//test->rotate(0.0f,+0.125f,0.0f);
+			test->girar(1);
+		}		
 	}
 }
 

@@ -5,6 +5,16 @@
 class Vehicle : public Object3D{
 public:
 	float velocity=0.0f;
+	
+	/*Giro:
+		<0 : izquierda
+		=0 : sin giro
+		>0 : derecha
+	*/
+
+	float giro=0.0f;
+	float giro_incremento=0.00125f;
+
 	float accel=0.000125f;//aceleracion
 	float decel=0.000125f;//desaceleracion
 	float decel_brake=0.75f;//freno
@@ -16,7 +26,8 @@ public:
 	void move_backward();
 	void brake();
 	void update();//sobre-escritura metodo update
-	void rotate(float,float,float);
+	void girar(int);
+	void centrar();
 	void decelerate();
 };
 #endif

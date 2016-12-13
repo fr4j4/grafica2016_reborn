@@ -12,16 +12,36 @@ void Vehicle::move_forward(){
 }
 
 void Vehicle::move_backward(){
-	/*
-	velocity+=accel;
-	pos.x+=velocity*cos(rotation.y);
-	pos.z+=velocity*sin(rotation.y);
-	*/
+	velocity-=accel;
+	pos.x-=velocity*cos(rotation.y);
+	pos.z-=velocity*sin(rotation.y);
 }
 
-void Vehicle::rotate(float x,float y,float z){
+void Vehicle::girar(int sentido){
+	float max=0.05f*(velocity*10);//giro maximo segun la velocidad
+	if(sentido>0&&giro<0 || sentido<0&&giro>0){
+		giro=0.0f;
+	}else{
+		if(fabs(giro)<max){//giro maximo
+			giro+=giro_incremento*sentido;
+		}else{
+			giro=max*sentido;
+		}
+	}
 	if(fabs(velocity)>0){
-		Object3D::rotate(x,y,z);
+		Object3D::rotate(0.0f,giro,0.0f);
+	}
+}
+
+void Vehicle::centrar(){
+	if(fabs(giro)<0.00125f){
+		giro=0.0f;
+	}else{
+		if(giro>0.0f){
+			giro-=giro_incremento;
+		}else if(giro<0.0f){
+			giro+=giro_incremento;
+		}
 	}
 }
 
@@ -29,16 +49,18 @@ void Vehicle::decelerate(){
 	if(fabs(velocity)<0.00125f){
 		velocity=0.0f;
 	}else{
-	if(velocity>accel){
-		//printf("desacelerando...\n");
-		velocity=decel-velocity;
-	}
-	if(velocity<accel){
-		//printf("desacelerando...\n");
-		velocity=decel+velocity;
-	}
-	pos.x+=velocity*cos(rotation.y);
-	pos.z+=velocity*sin(rotation.y);
+		if(velocity>0.0f){
+			//printf("desacelerando...\n");
+			velocity-=decel;
+			pos.x-=velocity*cos(rotation.y);
+			pos.z-=velocity*sin(rotation.y);
+		}
+		if(velocity<0.0f){
+			//printf("desacelerando...\n");
+			velocity+=decel;
+			pos.x-=velocity*cos(rotation.y);
+			pos.z-=velocity*sin(rotation.y);
+		}
 	}
 }
 
@@ -47,10 +69,8 @@ void Vehicle::brake(){
 }
 
 void Vehicle::update(){
-	M=glm::mat4();
-	M=glm::translate(M,pos);
-	M=glm::scale(M,scale);
-	M=glm::rotate(M,-rotation.y,glm::vec3(0.0f,1.0f,0.0f));
-	M=glm::translate(M,glm::vec3(-0.650f,0.0f,0.0f));
+	Object3D::update();
+	system("clear");
 	printf("Car_velocity: %f\n",velocity);
+	printf("Car_giro    : %f\n",giro);
 }
