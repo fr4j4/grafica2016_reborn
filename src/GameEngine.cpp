@@ -1,5 +1,4 @@
 #include "GameEngine.h"
-
 bool debug_mode;
 int g_gl_width;
 int g_gl_height;
@@ -12,6 +11,8 @@ GameEngine::GameEngine(){
 	g_gl_height=screenSize.y;
 	debug_mode=true;
 	tools::debug("GameEngine created",tools::DBG_INFO);
+	keyTools::init_keys();
+	//printf("Key:%i\n",key_status.count;
 }
 
 void GameEngine::setWindowSize(int w,int h){
@@ -40,10 +41,11 @@ void GameEngine::run(){
 	paused=false;
 	test=new Vehicle("mesh/sedan.obj",&shader_programme);
 	addObj(test);
-	addObj(new Vehicle("mesh/car/car.obj",&shader_programme));
+	addObj(new Object3D("mesh/car/car.obj",&shader_programme));
 	test->setPos(-3.0f,0.0f,3.0f);
 	cam->target=test;
 	test->set_scale(0.25f,0.25f,0.25f);
+
 	while(!glfwWindowShouldClose (g_window)){//bucle principal del motor de juegos
 		static double previous_seconds = glfwGetTime ();
 		double current_seconds = glfwGetTime ();
@@ -112,8 +114,16 @@ void GameEngine::readInGameKeys(){
 
 	if (GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_UP)) {
 		tools::debug("UP",tools::DBG_KEY_PRESSED);
+		keyTools::press(K_UP_ARROW);
 		test->move_forward();
 	}
+	else if ((keyTools::get_status(K_UP_ARROW)==1||keyTools::get_status(K_DOWN_ARROW)==1) && 
+		(GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_UP)) || GLFW_RELEASE == glfwGetKey (g_window, GLFW_KEY_DOWN)) {
+		//keyTools::release(K_UP_ARROW);
+		//keyTools::press(K_UP_ARROW);
+		test->decelerate();
+	}
+
 	if(GLFW_PRESS == glfwGetKey (g_window, GLFW_KEY_DOWN)){
 		tools::debug("DOWN",tools::DBG_KEY_PRESSED);
 		test->move_backward();

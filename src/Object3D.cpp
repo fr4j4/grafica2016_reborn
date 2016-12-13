@@ -60,7 +60,7 @@ void Object3D::rotate(float x,float y,float z){
 	rotation.z=fmod(rotation.z+z,2.0f*M_PI);
 }
 
-void Object3D::update(){
+ void Object3D::update(){
 	M=glm::mat4();
 	M=glm::translate(M,pos);
 	M=glm::scale(M,scale);

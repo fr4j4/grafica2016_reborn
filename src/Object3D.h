@@ -40,9 +40,9 @@ public:
 	void move_forward(float d);
 	void move_backward(float d);
 	void setPos(float x,float y,float z);
-	void rotate(float x,float y,float z);
+	virtual void rotate(float x,float y,float z);
 	void set_scale(float,float,float);
-	void update();
+	virtual void update();
 
 	void render();
 };

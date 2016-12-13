@@ -15,10 +15,13 @@
 #include "Vehicle.h"
 #include "Camera.h"
 
+#include "KeyTools.h"
+
+
 #define VERTEX_SHADER_FILE "shaders/test_vs.glsl.cpp"
 #define FRAGMENT_SHADER_FILE "shaders/test_fs.glsl.cpp"
 
-using namespace glm;
+//using namespace glm;
 
 class GameEngine{
 private:
