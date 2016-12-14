@@ -21,7 +21,7 @@ public:
 	
 	float max_velocity=0.1f;
 
-	Vehicle(const char*,GLuint*);
+	Vehicle(const char*,GLuint*,const char*);
 	~Vehicle();
 	
 	void move_forward();

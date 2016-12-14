@@ -1,4 +1,4 @@
-src=src/*.cpp
+src=src/*.cpp src/*.c
 output=bin/prog
 libs=-lGL -lGLEW -lglfw -lassimp 
 debug=1

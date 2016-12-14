@@ -27,7 +27,7 @@ public:
 	mat4 M2;
 	float rotateSpeed=0.025f;
 	float moveSpeed=0.025f;
-	Object3D(const char*,GLuint*);
+	Object3D(const char*,GLuint*,const char*);
 	~Object3D();
 	std::string name;
 	glm::vec3 rotation;
@@ -45,6 +45,7 @@ public:
 	virtual void update();
 
 	bool load_mesh(const char*);
+	bool load_texture(const char*);
 	void render();
 };
 

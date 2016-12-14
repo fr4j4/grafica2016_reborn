@@ -1,6 +1,6 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle(const char* file_name,GLuint* shader_programme):Object3D(file_name,shader_programme){
+Vehicle::Vehicle(const char* file_name,GLuint* shader_programme,const char* texture):Object3D(file_name,shader_programme,texture){
 	velocity=0.0f;
 }
 void Vehicle::move_forward(){
@@ -88,5 +88,5 @@ void Vehicle::update(){
 	M=glm::scale(M,scale);
 	M=glm::rotate(M,-rotation.y,glm::vec3(0.0f,1.0f,0.0f));
 	M=glm::translate(M,glm::vec3(-0.450f,0.0f,0.0f));
-	printf("Car_giro    : %f\n",giro);
+	//printf("Car_giro    : %f\n",giro);
 }

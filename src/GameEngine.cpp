@@ -39,18 +39,18 @@ void GameEngine::initGl(){
 void GameEngine::run(){
 	tools::debug("Engine is running",tools::DBG_INFO);
 	paused=false;
-	test=new Vehicle("mesh/sedan.obj",&shader_programme);
-	Vehicle* test3=new Vehicle("mesh/sedan.obj",&shader_programme);
-	test3->setPos(0.0f,0.0f,3.0f);
+	test=new Vehicle("mesh/sedan.obj",&shader_programme,"textures/azulmate2-1.jpg");
+	Vehicle* test3=new Vehicle("mesh/sedan.obj",&shader_programme,"textures/azulmate2-1.jpg");
+	test3->setPos(2.0f,0.0f,3.0f);
 	addObj(test);
 	addObj(test3);
-	addObj(new Object3D("mesh/car/car.obj",&shader_programme));
+	addObj(new Object3D("mesh/car/car.obj",&shader_programme,NULL));
 	test->setPos(-3.0f,0.0f,3.0f);
 	cam->target=test;
 	test->set_scale(0.25f,0.25f,0.25f);
 	test3->set_scale(0.25f,0.25f,0.25f);
 
-	Object3D* city=new Object3D("mesh/city.obj",&shader_programme);
+	Object3D* city=new Object3D("mesh/city.obj",&shader_programme,"textures/grafito1.jpg");
 	addObj(city);
 	city->set_scale(5.0f,5.0f,5.0f);
 	while(!glfwWindowShouldClose (g_window)){//bucle principal del motor de juegos
@@ -64,7 +64,6 @@ void GameEngine::run(){
 		glViewport (0, 0, g_gl_width, g_gl_height);
 		glUseProgram (shader_programme);
 		glfwPollEvents ();
-
 
 		//si algun escenario ha sido cargado
 		readGlobalKeys();//leer teclas "globales"
