@@ -1,25 +1,25 @@
 #ifndef OBJECT3D_H
 #define OBJECT3D_H
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <string>
 #include <iostream>
 #include <assert.h>
 #include <string>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
-#include "Tools.h"
+//#include "Tools.h"
 #include "maths_funcs.h"
 
 class Object3D{
 protected:
 	glm::mat4 T;
 	glm::mat4 R;
-	GLuint vao, vbo;
+	GLuint vao, vbo,FTYPE,FFACTOR,nbo, tbo, ebo,tex;
 	GLuint* shader_programme;
-	int numvertices;
+	int numvertices,numFaces;
 	int mat_location=0;
 
 public:
@@ -44,6 +44,7 @@ public:
 	void set_scale(float,float,float);
 	virtual void update();
 
+	bool load_mesh(const char*);
 	void render();
 };
 
